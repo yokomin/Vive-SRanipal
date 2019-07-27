@@ -283,7 +283,7 @@ namespace ViveSR
                 /// </summary>
                 /// <param name="gazeIndex">The index of a source of eye gaze data.</param>
                 /// <param name="origin">The starting point of the ray in local coordinates.</param>
-                /// <param name="direction">Tthe direction of the ray.</param>
+                /// <param name="direction">The direction of the ray.</param>
                 /// <returns>Indicates whether the eye gaze data received is valid.</returns>
                 public static bool GetGazeRay(GazeIndex gazeIndex, out Vector3 origin, out Vector3 direction)
                 {

@@ -16,8 +16,8 @@ namespace ViveSR.anipal.Eye{
         }
         [SerializeField] private Gaze whichEye;
         [SerializeField] private LineRenderer GazeRayRenderer;
-        Vector3 GazeOriginCombinedLocal, GazeDirectionCombinedLocal;
-        Vector3 GazeDirectionCombined;
+        Vector3 GazeOriginLocal, GazeDirectionLocal;
+        Vector3 GazeDirection;
 
         private void Start()
         {
@@ -36,27 +36,27 @@ namespace ViveSR.anipal.Eye{
 
             switch(whichEye){
                 case Gaze.Left:
-                    if (SRanipal_Eye.GetGazeRay(GazeIndex.LEFT, out GazeOriginCombinedLocal, out GazeDirectionCombinedLocal)) { }
+                    if (SRanipal_Eye.GetGazeRay(GazeIndex.LEFT, out GazeOriginLocal, out GazeDirectionLocal)) { }
                     else return;
-                    GazeDirectionCombined = Camera.main.transform.TransformDirection(GazeDirectionCombinedLocal);
-                    GazeRayRenderer.SetPosition(0, Camera.main.transform.position - Camera.main.transform.up * 0.05f 
+                    GazeDirection = Camera.main.transform.TransformDirection(GazeDirectionLocal);
+                    GazeRayRenderer.SetPosition(0, Camera.main.transform.position /*- Camera.main.transform.up * 0.05f*/  
                                             - Camera.main.transform.right * 0.034f);
-                    GazeRayRenderer.SetPosition(1, Camera.main.transform.position + GazeDirectionCombined * LengthOfRay);
+                    GazeRayRenderer.SetPosition(1, Camera.main.transform.position + GazeDirection * LengthOfRay);
                     break;
                 case Gaze.Right:
-                    if (SRanipal_Eye.GetGazeRay(GazeIndex.RIGHT, out GazeOriginCombinedLocal, out GazeDirectionCombinedLocal)) { }
+                    if (SRanipal_Eye.GetGazeRay(GazeIndex.RIGHT, out GazeOriginLocal, out GazeDirectionLocal)) { }
                     else return;
-                    GazeDirectionCombined = Camera.main.transform.TransformDirection(GazeDirectionCombinedLocal);
-                    GazeRayRenderer.SetPosition(0, Camera.main.transform.position - Camera.main.transform.up * 0.05f
+                    GazeDirection = Camera.main.transform.TransformDirection(GazeDirectionLocal);
+                    GazeRayRenderer.SetPosition(0, Camera.main.transform.position /*- Camera.main.transform.up * 0.05f*/  
                                             + Camera.main.transform.right * 0.034f);
-                    GazeRayRenderer.SetPosition(1, Camera.main.transform.position + GazeDirectionCombined * LengthOfRay);
+                    GazeRayRenderer.SetPosition(1, Camera.main.transform.position + GazeDirection * LengthOfRay);
                     break;
                 case Gaze.Combine:
-                    if (SRanipal_Eye.GetGazeRay(GazeIndex.COMBINE, out GazeOriginCombinedLocal, out GazeDirectionCombinedLocal)) { }
+                    if (SRanipal_Eye.GetGazeRay(GazeIndex.COMBINE, out GazeOriginLocal, out GazeDirectionLocal)) { }
                     else return;
-                    GazeDirectionCombined = Camera.main.transform.TransformDirection(GazeDirectionCombinedLocal);
-                    GazeRayRenderer.SetPosition(0, Camera.main.transform.position - Camera.main.transform.up * 0.05f);
-                    GazeRayRenderer.SetPosition(1, Camera.main.transform.position + GazeDirectionCombined * LengthOfRay);
+                    GazeDirection = Camera.main.transform.TransformDirection(GazeDirectionLocal);
+                    GazeRayRenderer.SetPosition(0, Camera.main.transform.position /*- Camera.main.transform.up * 0.05f*/  );
+                    GazeRayRenderer.SetPosition(1, Camera.main.transform.position + GazeDirection * LengthOfRay);
                     break;
             }
         }
